@@ -5,9 +5,11 @@ from .serial_driver import SerialDriver
 
 def loadConfig():
     config = configparser.ConfigParser()
-    if os.path.exists("config.cfg"):
-        print("Config file: " + os.path.abspath("config.cfg"))
-        config.read("config.cfg")
+    if not os.path.exists("~/zh"):
+        os.mkdir("~/zh")
+    if os.path.exists("~/zh/config.cfg"):
+        print("Config file: " + os.path.abspath("~/zh/config.cfg"))
+        config.read("~/zh/config.cfg")
     else:
         print("Config not found, writing default config to file")
         config["General"] = {}
@@ -15,7 +17,7 @@ def loadConfig():
         general["port"] = "ttyUSB0"
         general["baudrate"] = "9600"
         general['command'] = "amixer -c 1 set Master {value}%%"
-        with open("config.cfg","w") as configfile:
+        with open("~/zh/config.cfg","w") as configfile:
             config.write(configfile)
             
     return config
