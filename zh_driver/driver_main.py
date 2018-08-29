@@ -5,8 +5,6 @@ from .serial_driver import SerialDriver
 
 def loadConfig():
     config = configparser.ConfigParser()
-    if not os.path.exists("~/zh"):
-        os.mkdir("~/zh")
     if os.path.exists("~/zh/config.cfg"):
         print("Config file: " + os.path.abspath("~/zh/config.cfg"))
         config.read("~/zh/config.cfg")
