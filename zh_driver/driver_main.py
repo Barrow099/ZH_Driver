@@ -3,11 +3,13 @@ import os
 from .serial_driver import SerialDriver
 
 
+
 def loadConfig():
+    configFile = "/etc/zh/config.cfg"
     config = configparser.ConfigParser()
-    if os.path.exists("~/zh/config.cfg"):
-        print("Config file: " + os.path.abspath("~/zh/config.cfg"))
-        config.read("~/zh/config.cfg")
+    if os.path.exists(configFile):
+        print("Config file: " + os.path.abspath(configFile))
+        config.read(configFile)
     else:
         print("Config not found, writing default config to file")
         config["General"] = {}
@@ -15,7 +17,7 @@ def loadConfig():
         general["port"] = "ttyUSB0"
         general["baudrate"] = "9600"
         general['command'] = "amixer -c 1 set Master {value}%%"
-        with open("~/zh/config.cfg","w") as configfile:
+        with open(configFile,"w") as configfile:
             config.write(configfile)
             
     return config
